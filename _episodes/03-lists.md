@@ -170,23 +170,7 @@ does not.
 > ~~~
 > {: .language-python}
 >
-> Here is a visual example of how indexing a list of lists `x` works:
->
-> [![The first element of a list.
-> Adapted from @hadleywickham.](../fig/indexing_lists_python.png)][hadleywickham-tweet]
->
-> Using the previously declared list `x`, these would be the results of the
-> index operations shown in the image:
->
-> ~~~
-> print([x[0]])
-> ~~~
-> {: .language-python}
->
-> ~~~
-> [['pepper', 'zucchini', 'onion']]
-> ~~~
-> {: .output}
+> We can use indexing to access individual shelves, or items on shelves:
 >
 > ~~~
 > print(x[0])
@@ -207,10 +191,7 @@ does not.
 > 'pepper'
 > ~~~
 > {: .output}
->
-> Thanks to [Hadley Wickham][hadleywickham-tweet]
-> for the image above.
-{: .callout}
+
 
 > ## Heterogeneous Lists
 > Lists in Python can contain elements of different types. Example:
@@ -359,10 +340,10 @@ last: 4
 >
 > ~~~
 > string_for_slicing = "Observation date: 02-Feb-2013"
-> list_for_slicing = [["fluorine", "F"], 
->                     ["chlorine", "Cl"], 
->                     ["bromine", "Br"], 
->                     ["iodine", "I"], 
+> list_for_slicing = [["fluorine", "F"],
+>                     ["chlorine", "Cl"],
+>                     ["bromine", "Br"],
+>                     ["iodine", "I"],
 >                     ["astatine", "At"]]
 > ~~~
 > {: .language-python}
