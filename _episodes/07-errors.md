@@ -326,11 +326,9 @@ NameError: name 'count' is not defined
 Next up are errors having to do with containers (like lists and strings) and the items within them.
 If you try to access an item in a list or a string that does not exist,
 then you will get an error.
-This makes sense:
-if you asked someone what day they would like to get coffee,
-and they answered "caturday",
-you might be a bit annoyed.
-Python gets similarly annoyed if you try to ask it for an item that doesn't exist:
+This makes sense: If you asked someone what the 13th month of the year is,
+they might be a bit confused.
+Python gets similarly confusedfile_handle = open('myfile.txt', 'r') if you try to ask it for an item that doesn't exist:
 
 ~~~
 letters = ['a', 'b', 'c']
@@ -363,74 +361,6 @@ IndexError: list index out of range
 Here,
 Python is telling us that there is an `IndexError` in our code,
 meaning we tried to access a list index that did not exist.
-
-## File Errors
-
-The last type of error we'll cover today
-are those associated with reading and writing files: `FileNotFoundError`.
-If you try to read a file that does not exist,
-you will receive a `FileNotFoundError` telling you so.
-If you attempt to write to a file that was opened read-only, Python 3
-returns an `UnsupportedOperationError`.
-More generally, problems with input and output manifest as
-`IOError`s or `OSError`s, depending on the version of Python you use.
-
-~~~
-file_handle = open('myfile.txt', 'r')
-~~~
-{: .language-python}
-
-~~~
----------------------------------------------------------------------------
-FileNotFoundError                         Traceback (most recent call last)
-<ipython-input-14-f6e1ac4aee96> in <module>()
-----> 1 file_handle = open('myfile.txt', 'r')
-
-FileNotFoundError: [Errno 2] No such file or directory: 'myfile.txt'
-~~~
-{: .error}
-
-One reason for receiving this error is that you specified an incorrect path to the file.
-For example,
-if I am currently in a folder called `myproject`,
-and I have a file in `myproject/writing/myfile.txt`,
-but I try to just open `myfile.txt`,
-this will fail.
-The correct path would be `writing/myfile.txt`.
-It is also possible (like with `NameError`) that you just made a typo.
-
-A related issue can occur if you use the "read" flag instead of the "write" flag.
-Python will not give you an error if you try to open a file for writing
-when the file does not exist.
-However,
-if you meant to open a file for reading,
-but accidentally opened it for writing,
-and then try to read from it,
-you will get an `UnsupportedOperation` error
-telling you that the file was not opened for reading:
-
-~~~
-file_handle = open('myfile.txt', 'w')
-file_handle.read()
-~~~
-{: .language-python}
-
-~~~
----------------------------------------------------------------------------
-UnsupportedOperation                      Traceback (most recent call last)
-<ipython-input-15-b846479bc61f> in <module>()
-      1 file_handle = open('myfile.txt', 'w')
-----> 2 file_handle.read()
-
-UnsupportedOperation: not readable
-~~~
-{: .error}
-
-These are the most common errors with files,
-though many others exist.
-If you get an error that you've never seen before,
-searching the Internet for that error type
-often reveals common reasons why you might get that error.
 
 > ## Reading Error Messages
 >
@@ -552,7 +482,7 @@ often reveals common reasons why you might get that error.
 > {: .language-python}
 >
 > > ## Solution
-> > 3 `NameError`s for `number` being misspelled, for `message` not defined, 
+> > 3 `NameError`s for `number` being misspelled, for `message` not defined,
 > > and for `a` not being in quotes.
 > >
 > > Fixed version:
