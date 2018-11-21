@@ -146,8 +146,14 @@ or the next person who reads it won't be able to understand what's going on.
 
 Now that we know how to wrap bits of code up in functions,
 we can make our inflammation analysis easier to read and easier to reuse.
-First, let's make an `analyze` function that generates our plots:
+First, let's import the libraries that we'll need:
 
+~~~
+import numpy, matplotlib.pyplot, glob
+~~~
+{: .language-python}
+
+Then, let's make an `analyze` function that generates our plots:
 ~~~
 def analyze(filename):
 
@@ -195,7 +201,7 @@ we can now read and reuse both ideas separately.
 We can reproduce the previous analysis with a much simpler `for` loop:
 
 ~~~
-filenames = sorted(glob.glob('inflammation*.csv'))
+filenames = sorted(glob.glob('data/inflammation*.csv'))
 
 for f in filenames[:3]:
     print(f)
@@ -246,7 +252,7 @@ That looks right,
 so let's try `offset_mean` on our real data:
 
 ~~~
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+data = numpy.loadtxt(fname='data/inflammation-01.csv', delimiter=',')
 print(offset_mean(data, 0))
 ~~~
 {: .language-python}
@@ -394,7 +400,7 @@ In fact,
 we can pass the filename to `loadtxt` without the `fname=`:
 
 ~~~
-numpy.loadtxt('inflammation-01.csv', delimiter=',')
+numpy.loadtxt('data/inflammation-01.csv', delimiter=',')
 ~~~
 {: .language-python}
 
@@ -806,7 +812,7 @@ readable code!
 > >
 > > ~~~
 > > 259.81666666666666
-> > 287.15
+> > 278.15
 > > 273.15
 > > 0
 > > ~~~
