@@ -244,13 +244,13 @@ Each assertion gives the person reading the program
 a chance to check (consciously or otherwise)
 that their understanding matches what the code is doing.
 
-Most good programmers follow two rules when adding assertions to their code.
-The first is, *fail early, fail often*.
+Most good programmers follow two rules when adding assertions to their code:
+1. *fail early, fail often*.
 The greater the distance between when and where an error occurs and when it's noticed,
 the harder the error will be to debug,
 so good code catches mistakes as early as possible.
 
-The second rule is, *turn bugs into assertions or tests*.
+2. *turn bugs into assertions or tests*.
 Whenever you fix a bug, write an assertion that catches the mistake
 should you make it again.
 If you made a mistake in a piece of code,
