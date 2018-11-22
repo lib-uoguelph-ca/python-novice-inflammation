@@ -462,8 +462,6 @@ some information is better than none,
 and if we trace the behavior of the function with that input,
 we realize that we're initializing `lowest` and `highest` to 0.0 and 1.0 respectively,
 regardless of the input values.
-This violates another important rule of programming:
-*always initialize from data*.
 
 > ## Pre- and Post-Conditions
 >
