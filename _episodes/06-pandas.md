@@ -321,35 +321,6 @@ max      23424.766830    26997.936570    30687.754730    34435.367440
 > {: .solution}
 {: .challenge}
 
-> ## Reading Files in Other Directories
->
-> The data for your current project is stored in a file called `microbes.csv`,
-> which is located in a folder called `field_data`.
-> You are doing analysis in a notebook called `analysis.ipynb`
-> in a sibling folder called `thesis`:
->
-> ~~~
-> your_home_directory
-> +-- field_data/
-> |   +-- microbes.csv
-> +-- thesis/
->     +-- analysis.ipynb
-> ~~~
-> {: .output}
->
-> What value(s) should you pass to `read_csv` to read `microbes.csv` in `analysis.ipynb`?
->
-> > ## Solution
-> > We need to specify the path to the file of interest in the call to `pandas.read_csv`. We first need to 'jump' out of
-> > the folder `thesis` using '../' and then into the folder `field_data` using 'field_data/'. Then we can specify the filename `microbes.csv.
-> > The result is as follows:
-> > ~~~
-> > data_microbes = pandas.read_csv('../field_data/microbes.csv')
-> > ~~~
-> >{: .python}
-> {: .solution}
-{: .challenge}
-
 > ## Writing Data
 >
 > As well as the `read_csv` function for reading data from a file,
@@ -390,14 +361,14 @@ between DataFrames.
 ## Selecting values
 
 To access a value at the position `[i,j]` of a DataFrame, we have two options, depending on
-what is the meaning of `i` in use.
-Remember that a DataFrame provides a *index* as a way to identify the rows of the table;
-a row, then, has a *position* inside the table as well as a *label*, which
-uniquely identifies its *entry* in the DataFrame.
+what whether we want to find a value based on its labels or its numerical index.
 
-## Use `DataFrame.iloc[..., ...]` to select values by their (entry) position
+The term index here gets a bit overloaded because we have the concept of array indexes from vanilla python arrays (and numpy arrays) as well as the concept of the row index from the pandas DataFrame.
+To be clear, in this section I'll refer to the prior as `numerical index` and the latter as `row index`.
 
-*   Can specify location by numerical index analogously to 2D version of character selection in strings.
+## Selecting Values Using Their Numerical Index
+
+We can use `DataFrame.iloc[i,j]` to specify location by numerical index the same way we would with a numpy array:
 
 ~~~
 import pandas
@@ -410,12 +381,11 @@ print(data.iloc[0, 0])
 ~~~
 {: .output}
 
-## Use `DataFrame.loc[..., ...]` to select values by their (entry) label.
+## Selecting Values Using Their Label
 
-*   Can specify location by row name analogously to 2D version of dictionary keys.
+If you'd rather select values by their label (and row index), you can do DataFrame.loc[i, j].
 
 ~~~
-data = pandas.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
 print(data.loc["Albania", "gdpPercap_1952"])
 ~~~
 {: .language-python}
@@ -423,9 +393,10 @@ print(data.loc["Albania", "gdpPercap_1952"])
 1601.056136
 ~~~
 {: .output}
-## Use `:` on its own to mean all columns or all rows.
 
-*   Just like Python's usual slicing notation.
+## Selecting Rows and Columns
+
+If you'd like to select full rows or columns from your DataFrame, you can use the same notation `:` that we used with Numpy arrays:
 
 ~~~
 print(data.loc["Albania", :])
@@ -448,7 +419,7 @@ Name: Albania, dtype: float64
 ~~~
 {: .output}
 
-*   Would get the same result printing `data.loc["Albania"]` (without a second index).
+You would get the same result printing `data.loc["Albania"]` (without a second index).
 
 ~~~
 print(data.loc[:, "gdpPercap_1952"])
@@ -467,10 +438,20 @@ Name: gdpPercap_1952, dtype: float64
 ~~~
 {: .output}
 
-*   Would get the same result printing `data["gdpPercap_1952"]`
-*   Also get the same result printing `data.gdpPercap_1952` (since it's a column name)
+Since we work with columns so often in this kind of work you can also take a short cut to refer to a column by its label.
+~~~
+print(data["gdpPercap_1952"])
+~~~
+{: .language-python}
+And if your column label doesn't have any spaces or special characters you can even get result printing `data.gdpPercap_1952` (since it's a column name)
+~~~
+print(data.gdpPercap_1952)
+~~~
+{: .language-python}
 
-## Select multiple columns or rows using `DataFrame.loc` and a named slice.
+## Selecting Multiple Columns
+
+We can use the same slicing notation that we used earlier:
 
 ~~~
 print(data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972'])
@@ -491,16 +472,26 @@ In the above code, we discover that **slicing using `loc` is inclusive at both
 ends**, which differs from **slicing using `iloc`**, where slicing indicates
 everything up to but not including the final index.
 
+We can also select individual columns, even if they're not arranged side by side:
+
+~~~
+print(data.loc[['Italy','Albania'], ['gdpPercap_1952', 'gdpPercap_1972']])
+~~~
+{: .language-python}
+~~~
+         gdpPercap_1952  gdpPercap_1972
+country
+Italy       4931.404155    12269.273780
+Albania     1601.056136     3313.422188
+~~~
+{: .output}
 
 ## Result of slicing can be used in further operations.
 
-*   Usually don't just print a slice.
-*   All the statistical operators that work on entire dataframes
-    work the same way on slices.
-*   E.g., calculate max of a slice.
+Usually we won't just print a slice. Instead, we'll use it as the basis to do some other form of computation. Fortunately, numpy and pandas are designed to work together, so we can use the same numpy methods with our Dataframes:
 
 ~~~
-print(data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972'].max())
+print(numpy.min(data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972']))
 ~~~
 {: .language-python}
 ~~~
@@ -511,25 +502,12 @@ dtype: float64
 ~~~
 {: .output}
 
-~~~
-print(data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972'].min())
-~~~
-{: .language-python}
-~~~
-gdpPercap_1962    4649.593785
-gdpPercap_1967    5907.850937
-gdpPercap_1972    7778.414017
-dtype: float64
-~~~
-{: .output}
-
-## Use comparisons to select data based on value.
-
-*   Comparison is applied element by element.
-*   Returns a similarly-shaped dataframe of `True` and `False`.
+## Select Data Based on Value
+Often, it's useful to be able to subset our data based on some condition. For example, how would I generate a subset of the data where the GDP is greater than some value?
+If you do a conditional statement with a pandas DataFrame, the result will be a DataFrame where each element is the result of that conditional statement.
 
 ~~~
-# Use a subset of data to keep output readable.
+# Let's use a subset of data to keep output readable.
 subset = data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972']
 print('Subset of data:\n', subset)
 
@@ -560,7 +538,7 @@ Poland               False          False          False
 
 ## Select values or NaN using a Boolean mask.
 
-*   A frame full of Booleans is sometimes called a *mask* because of how it can be used.
+This is neat, but it would really be useful if we could actually subset our data with it. Fortunately, we can! A frame full of Booleans is sometimes called a *mask* because of how it can be used.
 
 ~~~
 mask = subset > 10000
@@ -578,8 +556,7 @@ Poland                  NaN             NaN             NaN
 ~~~
 {: .output}
 
-*   Get the value where the mask is true, and NaN (Not a Number) where it is false.
-*   Useful because NaNs are ignored by operations like max, min, average, etc.
+So the mask will produce a DataFrame where the values that meet our condition are there, and the other values are replaced with NaN (Not a Number). This is useful because NaNs are ignored by operations like max, min, average, etc.
 
 ~~~
 print(subset[subset > 10000].describe())
@@ -597,90 +574,6 @@ min      12790.849560    10022.401310    12269.273780
 max      13450.401510    16361.876470    18965.055510
 ~~~
 {: .output}
-
-## Select-Apply-Combine operations
-
-Pandas vectorizing methods and grouping operations are features that provide users
-much flexibility to analyse their data.
-
-For instance, let's say we want to have a clearer view on how the European countries
-split themselves according to their GDP.
-
-1.  We may have a glance by splitting the countries in two groups during the years surveyed,
-    those who presented a GDP *higher* than the European average and those with a *lower* GDP.
-2.  We then estimate a *wealthy score* based on the historical (from 1962 to 2007) values,
-    where we account how many times a country has participated in the groups of *lower* or *higher* GDP
-
-~~~
-mask_higher = data.apply(lambda x:x>x.mean())
-wealth_score = mask_higher.aggregate('sum',axis=1)/len(data.columns)
-wealth_score
-~~~
-{: .language-python}
-~~~
-country
-Albania                   0.000000
-Austria                   1.000000
-Belgium                   1.000000
-Bosnia and Herzegovina    0.000000
-Bulgaria                  0.000000
-Croatia                   0.000000
-Czech Republic            0.500000
-Denmark                   1.000000
-Finland                   1.000000
-France                    1.000000
-Germany                   1.000000
-Greece                    0.333333
-Hungary                   0.000000
-Iceland                   1.000000
-Ireland                   0.333333
-Italy                     0.500000
-Montenegro                0.000000
-Netherlands               1.000000
-Norway                    1.000000
-Poland                    0.000000
-Portugal                  0.000000
-Romania                   0.000000
-Serbia                    0.000000
-Slovak Republic           0.000000
-Slovenia                  0.333333
-Spain                     0.333333
-Sweden                    1.000000
-Switzerland               1.000000
-Turkey                    0.000000
-United Kingdom            1.000000
-dtype: float64
-~~~
-{: .output}
-
-Finally, for each group in the `wealth_score` table, we sum their (financial) contribution
-across the years surveyed:
-
-~~~
-data.groupby(wealth_score).sum()
-~~~
-{: .language-python}
-~~~
-          gdpPercap_1952  gdpPercap_1957  gdpPercap_1962  gdpPercap_1967  \
-0.000000    36916.854200    46110.918793    56850.065437    71324.848786
-0.333333    16790.046878    20942.456800    25744.935321    33567.667670
-0.500000    11807.544405    14505.000150    18380.449470    21421.846200
-1.000000   104317.277560   127332.008735   149989.154201   178000.350040
-
-          gdpPercap_1972  gdpPercap_1977  gdpPercap_1982  gdpPercap_1987  \
-0.000000    88569.346898   104459.358438   113553.768507   119649.599409
-0.333333    45277.839976    53860.456750    59679.634020    64436.912960
-0.500000    25377.727380    29056.145370    31914.712050    35517.678220
-1.000000   215162.343140   241143.412730   263388.781960   296825.131210
-
-          gdpPercap_1992  gdpPercap_1997  gdpPercap_2002  gdpPercap_2007
-0.000000    92380.047256   103772.937598   118590.929863   149577.357928
-0.333333    67918.093220    80876.051580   102086.795210   122803.729520
-0.500000    36310.666080    40723.538700    45564.308390    51403.028210
-1.000000   315238.235970   346930.926170   385109.939210   427850.333420
-~~~
-{: .output}
-
 
 > ## Selection of Individual Values
 >
@@ -913,16 +806,6 @@ data.groupby(wealth_score).sum()
 > > {: .language-python}
 > {: .solution}
 {: .challenge}
-
-
-> ## Interpretation
->
-> Poland's borders have been stable since 1945,
-> but changed several times in the years before then.
-> How would you handle this if you were creating a table of GDP per capita for Poland
-> for the entire twentieth century?
-{: .challenge}
-
 
 [pandas-dataframe]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
 [pandas-series]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html
