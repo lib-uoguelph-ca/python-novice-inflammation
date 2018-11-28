@@ -120,7 +120,9 @@ Here we can see a variety of information about our dataset:
     *   We will talk later about null values, which are used to represent missing observations.
 *   Uses 208 bytes of memory.
 
-## The `DataFrame.columns` variable stores information about the DataFrame's columns:
+## Objects in Python
+
+We've already seen that variables in Python have a type like int, float, or string. But there's also a whole host of more complex types like the DataFrame. Often called 'objects', these more complex variables can hold your data, just like a regular variable, but they might also keep other data as well. For example, the DataFrame keeps a list of the columns in your dataset:
 
 ~~~
 print(data.columns)
@@ -134,11 +136,23 @@ Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
 ~~~
 {: .output}
 
-`data.columns` is some syntax that we haven't quite seen before. Here, columns refers to some extra data that's stored in the DataFrame object that we call `data`. We call this data an *attribute*, though you might also hear people call this a *property* or *member*.
+`data.columns` is some syntax that we haven't quite seen before. Here, columns refers to some extra data that's stored in our DataFrame object. We call this data an *attribute*, though you might also hear people call this a *property* or *member variable*.
 
-We've already seen that variables in Python have a type like int, float, or string. But there's also a whole host of more complex types like the DataFrame. Complex objects like the DataFrame can hold your data, just like any other variable, but they might also keep other data, for example a list of the columns in your dataset. In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `plot()` function, which provides common matplotlib plots of the data in the DataFrame.
+In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `plot()` function, which provides common matplotlib plots of the data in the DataFrame.
 
-## Transposing a DataFrame.
+~~~
+import matplotlib.pyplot
+%matplotlib inline
+data.plot(kind="density")
+matplotlib.pyplot.show()
+~~~
+{: .python}
+~~~
+![Density plot of gapminder dataset](../fig/pandas-density.png)
+~~~
+{: .output}
+
+## Transposing a DataFrame
 
 Occasionally, it's useful to treat columns as rows and vice versa. This is done so commonly that the DataFrame comes with a function to do just that:
 
@@ -223,7 +237,7 @@ max      23424.766830    26997.936570    30687.754730    34435.367440
 > {: .solution}
 {: .challenge}
 
-> ## Inspecting Data.
+> ## Inspecting Data
 >
 > After reading the data for the Americas,
 > use `help(americas.head)` and `help(americas.tail)`
