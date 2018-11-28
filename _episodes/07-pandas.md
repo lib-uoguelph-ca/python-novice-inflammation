@@ -120,38 +120,39 @@ Here we can see a variety of information about our dataset:
     *   We will talk later about null values, which are used to represent missing observations.
 *   Uses 208 bytes of memory.
 
-## Objects in Python
-
-We've already seen that variables in Python have a type like int, float, or string. But there's also a whole host of more complex types like the DataFrame. Often called 'objects', these more complex variables can hold your data, just like a regular variable, but they might also keep other data as well. For example, the DataFrame keeps a list of the columns in your dataset:
-
-~~~
-print(data.columns)
-~~~
-{: .python}
-~~~
-Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
-       'gdpPercap_1972', 'gdpPercap_1977', 'gdpPercap_1982', 'gdpPercap_1987',
-       'gdpPercap_1992', 'gdpPercap_1997', 'gdpPercap_2002', 'gdpPercap_2007'],
-      dtype='object')
-~~~
-{: .output}
-
-`data.columns` is some syntax that we haven't quite seen before. Here, columns refers to some extra data that's stored in our DataFrame object. We call this data an *attribute*, though you might also hear people call this a *property* or *member variable*.
-
-In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `plot()` function, which provides common matplotlib plots of the data in the DataFrame.
-
-~~~
-import matplotlib.pyplot
-%matplotlib inline
-data.plot(kind="density")
-matplotlib.pyplot.show()
-~~~
-{: .python}
-~~~
-![Density plot of gapminder dataset](../fig/pandas-density.png)
-~~~
-{: .output}
-
+> ## Objects in Python
+>
+> We've already seen that variables in Python have a type like int, float, or string. But there's also a whole host of more complex types like the DataFrame. Often called 'objects', these more complex variables can hold your data, just like a regular variable, but they might also keep other data as well. For example, the DataFrame keeps a list of the columns in your dataset:
+>
+> ~~~
+> print(data.columns)
+> ~~~
+> {: .python}
+> ~~~
+> Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
+>        'gdpPercap_1972', 'gdpPercap_1977', 'gdpPercap_1982', 'gdpPercap_1987',
+>        'gdpPercap_1992', 'gdpPercap_1997', 'gdpPercap_2002', 'gdpPercap_2007'],
+>       dtype='object')
+> ~~~
+> {: .output}
+>
+> In the above code, `columns` refers to some extra data that's stored in our DataFrame object. We call this data an *attribute*, though you might also hear people call this a *property* or *member variable*.
+>
+> In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `plot()` function, which provides common matplotlib plots of the data in the DataFrame.
+>
+> ~~~
+> import matplotlib.pyplot
+> %matplotlib inline
+> data.plot(kind="density")
+> matplotlib.pyplot.show()
+> ~~~
+> {: .python}
+> ~~~
+> ![Density plot of gapminder dataset](../fig/pandas-density.png)
+> ![Plot with step lines](../fig/01-numpy_exercise_0.png)
+> ~~~
+> {: .output}
+{: .callout}
 ## Transposing a DataFrame
 
 Occasionally, it's useful to treat columns as rows and vice versa. This is done so commonly that the DataFrame comes with a function to do just that:
