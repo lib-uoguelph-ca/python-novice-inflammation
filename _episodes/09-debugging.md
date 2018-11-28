@@ -1,7 +1,7 @@
 ---
 title: Debugging
-teaching: 30
-exercises: 0
+teaching: 20
+exercises: 5
 questions:
 - "How can I debug my program?"
 objectives:

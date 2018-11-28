@@ -1,6 +1,6 @@
 ---
 title: Analyzing Patient Data
-teaching: 60
+teaching: 75
 exercises: 30
 questions:
 - "How can I process tabular data files in Python?"
@@ -608,6 +608,8 @@ standard deviation: 4.61383319712
 > to see a list of all functions and attributes that you can use. After selecting one, you
 > can also add a question mark (e.g. `numpy.cumprod?`), and IPython will return an
 > explanation of the method! This is the same as doing `help(numpy.cumprod)`.
+>
+> For more information, you can always refer to the [Numpy User Guide](https://docs.scipy.org/doc/numpy-1.15.4/user/basics.html) and [Reference Documentation](https://docs.scipy.org/doc/numpy-1.15.1/reference/)
 {: .callout}
 
 When analyzing data, though,

@@ -1,7 +1,7 @@
 ---
 title: Storing Multiple Values in Lists
 teaching: 30
-exercises: 0
+exercises:20
 questions:
 - "How can I store many values together?"
 objectives:
@@ -20,12 +20,8 @@ list[2:9]), in the same way as strings and arrays."
 - "Strings are immutable (i.e., the characters in them cannot be changed)."
 ---
 
-Just as a `for` loop is a way to do operations many times,
-a list is a way to store many values.
-Unlike NumPy arrays,
-lists are built into the language (so we don't have to load a library
-to use them).
-We create a list by putting values inside square brackets and separating the values with commas:
+Just as a `for` loop is a way to do operations many times, a list is a way to store many values.
+Unlike NumPy arrays, lists are built into the language (so we don't have to load a library to use them). We create a list by putting values inside square brackets and separating the values with commas:
 
 ~~~
 odds = [1, 3, 5, 7]
@@ -107,7 +103,7 @@ TypeError: 'str' object does not support item assignment
 
 does not.
 
-> ## Ch-Ch-Ch-Ch-Changes
+> ## Changing Data
 >
 > Data which can be modified in place is called [mutable]({{ page.root }}/reference/#mutable),
 > while data which cannot be modified is called [immutable]({{ page.root }}/reference/#immutable).

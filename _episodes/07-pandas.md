@@ -1,6 +1,6 @@
 ---
 title: "Working with DataFrames"
-teaching: 25
+teaching: 30
 exercises: 25
 questions:
 - "How can I do statistical analysis of tabular data?"
