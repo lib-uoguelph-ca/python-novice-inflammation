@@ -1,5 +1,5 @@
 ---
-title: "Pandas DataFrames"
+title: "Working with DataFrames"
 teaching: 25
 exercises: 25
 questions:
@@ -21,16 +21,11 @@ keypoints:
 
 ---
 
-## Use the Pandas library to do statistics on tabular data.
+## Analyzing Tabular Data With Pandas
 
-*   Pandas is a widely-used Python library for statistics, particularly on tabular data.
-*   Borrows many features from R's dataframes.
-    *   A 2-dimenstional table whose columns have names
-        and potentially have different data types.
-*   Load it with `import pandas`.
-*   Read a Comma Separate Values (CSV) data file with `pandas.read_csv`.
-    *   Argument is the name of the file to be read.
-    *   Assign result to a variable to store the data that was read.
+Pandas is a widely-used Python library for statistics, particularly on tabular data. If you're familiar with R, you'll notice many similarities, since Pandas follows the same patterns.
+The star of the Pandas library is the DataFrame type. A DataFrame represents a 2-dimensional table with named columns and rows. A big advantage of DataFrames over numpy array is that a DataFrame can have have different data types for each column.
+On top of that, Pandas DataFrames provide a lot of extra functionality to make manipulating and working with your data easier.
 
 ~~~
 import pandas
@@ -58,14 +53,14 @@ print(data)
 ~~~
 {: .output}
 
-*   The columns in a dataframe are the observed variables, and the rows are the observations.
-*   Pandas uses backslash `\` to show wrapped lines when output is too wide to fit the screen.
+Here we use the read_csv function to read in a file from our data directory. If we print our DataFrame we can see that the columns in a DataFrame contain the observed variables, and the rows contain the observations.
+Note that since our dataset has so many columns, Pandas will use a backslash `\` to show that it has wrapped lines when output is too wide to fit the screen.
 
 ## Named Collumns and Rows
 
-One of the great benefits of using pandas DataFrames is that dataframes have support for row and column names.
+One of the great benefits of using pandas DataFrames is that DataFrames have support for row and column names.
 
-In our gapminder data above, we can see that the columns include the name of the variable. Similarly, we can see that the rows have been indexed with integers. If we prefer, we can provide another column to use as the row names:
+In our data above, we can see that the columns include the name of the variable. Similarly, we can see that the rows have been indexed with integers. If we prefer, we can provide another column to use as the row names:
 
 ~~~
 data = pandas.read_csv('data/gapminder_gdp_oceania.csv', index_col='country')
@@ -91,7 +86,7 @@ New Zealand     18363.32494     21050.41377     23189.80135     25185.00911
 {: .output}
 
 
-## Use `DataFrame.info` to find out more about a dataframe.
+## Use `DataFrame.info` to find out more about a DataFrame.
 
 ~~~
 data.info()
@@ -118,7 +113,7 @@ memory usage: 208.0+ bytes
 ~~~
 {: .output}
 
-Here we can see a variety of information about our dataset
+Here we can see a variety of information about our dataset:
 *   This is a `DataFrame`
 *   It contains two rows named `'Australia'` and `'New Zealand'`
 *   It has twelve columns, each of which has two actual 64-bit floating point values.
@@ -139,7 +134,9 @@ Index(['gdpPercap_1952', 'gdpPercap_1957', 'gdpPercap_1962', 'gdpPercap_1967',
 ~~~
 {: .output}
 
-This is something that we haven't quite seen before. Here, columns refers to some extra data that's stored in the DataFrame object that we call `data`. We call this data an *attribute*.
+`data.columns` is some syntax that we haven't quite seen before. Here, columns refers to some extra data that's stored in the DataFrame object that we call `data`. We call this data an *attribute*, though you might also hear people call this a *property* or *member*.
+
+We've already seen that variables in Python have a type like int, float, or string. But there's also a whole host of more complex types like the DataFrame. Complex objects like the DataFrame can hold your data, just like any other variable, but they might also keep other data, for example a list of the columns in your dataset. In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `plot()` function, which provides common matplotlib plots of the data in the DataFrame.
 
 ## Transposing a DataFrame.
 
@@ -225,8 +222,6 @@ max      23424.766830    26997.936570    30687.754730    34435.367440
 > >{: .python}
 > {: .solution}
 {: .challenge}
-
-
 
 > ## Inspecting Data.
 >
