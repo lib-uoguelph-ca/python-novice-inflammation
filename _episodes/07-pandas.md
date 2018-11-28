@@ -147,11 +147,8 @@ Here we can see a variety of information about our dataset:
 > matplotlib.pyplot.show()
 > ~~~
 > {: .python}
-> ~~~
+>
 > ![Density plot of gapminder dataset](../fig/pandas-density.png)
-> ![Plot with step lines](../fig/01-numpy_exercise_0.png)
-> ~~~
-> {: .output}
 {: .callout}
 ## Transposing a DataFrame
 
