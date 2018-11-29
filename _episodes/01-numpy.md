@@ -104,6 +104,13 @@ print(weight_kg)
 ~~~
 {: .output}
 
+> ## What is a function
+> Functions in Python are just bits of reusable code that someone else has written for us. Typically, functions take some sort of data as input, which we call arguments, and produce some output or behaviour.
+> Functions are always called by writing the name of the function, in this case `print` followed by some parentheses `()`:
+> Inside of those parentheses, we have the option of passing a comma-separated list of arguments. But we can't pass anything we want, most functions have a defined list of arguments that they need to be able to do their job.
+> The print function takes a list of arguments, and prints out the values of each.
+{: .callout}
+
 We can display multiple things at once using only one `print` command:
 
 ~~~
@@ -351,7 +358,26 @@ print(data.shape)
 ~~~
 {: .output}
 
-The output tells us that the `data` array variable contains 60 rows and 40 columns. When we
+The output tells us that the `data` array variable contains 60 rows and 40 columns.
+
+> ## Objects in Python
+>
+> We've already seen that variables in Python can have a type like int, float, or string. But there's also a whole host of more complex types like the numpy array. Often called 'objects', these more complex variables can hold your data just like a regular variable, but they might also keep other data as well. For example, the numpy array keeps a record of the number of columns and rows in our dataset.
+> In the above code, `shape` refers to some extra data that's stored in our DataFrame object. We call this data an *attribute*, though you might also hear people call this a *property* or *member*.
+>
+> In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `sum()` function, which provides the sum of all the numbers in the array.
+>
+> ~~~
+> print(data.sum())
+> ~~~
+> {: .python}
+> ~~~
+> 14757.0
+> ~~~
+> {: .output}
+{: .callout}
+
+When we
 created the variable `data` to store our arthritis data, we didn't just create the array; we also
 created information about the array, called [members]({{ page.root }}/reference/#member) or
 attributes. This extra information describes `data` in the same way an adjective describes a noun.
