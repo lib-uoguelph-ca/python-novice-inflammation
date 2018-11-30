@@ -288,6 +288,45 @@ last: 4
 ~~~
 {: .output}
 
+If you want to take a slice from the beginning of a sequence, you can omit the first index in the
+range:
+
+~~~
+date = "Monday 4 January 2016"
+day = date[0:6]
+print("Using 0 to begin range:", day)
+day = date[:6]
+print("Omitting beginning index:", day)
+~~~
+{: .language-python}
+
+~~~
+Using 0 to begin range: Monday
+Omitting beginning index: Monday
+~~~
+{: .output}
+
+And similarly, you can omit the ending index in the range to take a slice to the very end of the
+sequence:
+
+~~~
+months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+sond = months[8:12]
+print("With known last position:", sond)
+sond = months[8:len(months)]
+print("Using len() to get last entry:", sond)
+sond = months[8:]
+print("Omitting ending index:", sond)
+~~~
+{: .language-python}
+
+~~~
+With known last position: ["sep", "oct", "nov", "dec"]
+Using len() to get last entry: ["sep", "oct", "nov", "dec"]
+Omitting ending index: ["sep", "oct", "nov", "dec"]
+~~~
+{: .output}
+
 > ## Slicing From the End
 >
 > Use slicing to access only the last four characters of a string or entries of a list.
@@ -397,45 +436,6 @@ last: 4
 > > {: .language-python}
 > {: .solution}
 {: .challenge}
-
-If you want to take a slice from the beginning of a sequence, you can omit the first index in the
-range:
-
-~~~
-date = "Monday 4 January 2016"
-day = date[0:6]
-print("Using 0 to begin range:", day)
-day = date[:6]
-print("Omitting beginning index:", day)
-~~~
-{: .language-python}
-
-~~~
-Using 0 to begin range: Monday
-Omitting beginning index: Monday
-~~~
-{: .output}
-
-And similarly, you can omit the ending index in the range to take a slice to the very end of the
-sequence:
-
-~~~
-months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
-sond = months[8:12]
-print("With known last position:", sond)
-sond = months[8:len(months)]
-print("Using len() to get last entry:", sond)
-sond = months[8:]
-print("Omitting ending index:", sond)
-~~~
-{: .language-python}
-
-~~~
-With known last position: ["sep", "oct", "nov", "dec"]
-Using len() to get last entry: ["sep", "oct", "nov", "dec"]
-Omitting ending index: ["sep", "oct", "nov", "dec"]
-~~~
-{: .output}
 
 > ## Overloading
 >

@@ -362,10 +362,11 @@ The output tells us that the `data` array variable contains 60 rows and 40 colum
 
 > ## Objects in Python
 >
-> We've already seen that variables in Python can have a type like int, float, or string. But there's also a whole host of more complex types like the numpy array. Often called 'objects', these more complex variables can hold your data just like a regular variable, but they might also keep other data as well. For example, the numpy array keeps a record of the number of columns and rows in our dataset.
-> In the above code, `shape` refers to some extra data that's stored in our DataFrame object. We call this data an *attribute*, though you might also hear people call this a *property* or *member*.
+> We've already seen that variables in Python can have a type like int, float, or string. But there's also a whole host of more complex types like the numpy array. Often called *objects*, these more complex variables can hold your data just like a regular variable, but they might also keep other data as well.
 >
-> In addition to data, objects like this can come with their own functions. For example, the DataFrame comes with a `sum()` function, which provides the sum of all the numbers in the array.
+> For example, the numpy array keeps a record of the number of columns and rows in our dataset. In the above code, `shape` refers to some extra data that's stored in our numpy array object. We call this data an *attribute*, though you might also hear people call this a *property* or *member*.
+>
+> In addition to data, objects like this can come with their own functions. For example, the numpy array comes with a `sum()` function, which provides the sum of all the numbers in the array.
 >
 > ~~~
 > print(data.sum())
@@ -375,15 +376,9 @@ The output tells us that the `data` array variable contains 60 rows and 40 colum
 > 14757.0
 > ~~~
 > {: .output}
+>
+> In all these instances, we use the same dotted notation for the attributes of variables that we use for the functions in libraries because they have the same part-and-whole relationship.
 {: .callout}
-
-When we
-created the variable `data` to store our arthritis data, we didn't just create the array; we also
-created information about the array, called [members]({{ page.root }}/reference/#member) or
-attributes. This extra information describes `data` in the same way an adjective describes a noun.
-`data.shape` is an attribute of `data` which describes the dimensions of `data`. We use the same
-dotted notation for the attributes of variables that we use for the functions in libraries because
-they have the same part-and-whole relationship.
 
 If we want to get a single number from the array, we must provide an
 [index]({{ page.root }}/reference/#index) in square brackets after the variable name, just as we
@@ -508,7 +503,7 @@ operations with data are arithmetic: addition, subtraction, multiplication, and 
 do such operations on arrays, the operation is done element-by-element.  Thus:
 
 ~~~
-doubledata = data * 2.0
+doubledata = small * 2.0
 ~~~
 {: .language-python}
 
@@ -517,9 +512,9 @@ each element of which is twice the value of the corresponding element in `data`:
 
 ~~~
 print('original:')
-print(data[:3, 36:])
+print(small)
 print('doubledata:')
-print(doubledata[:3, 36:])
+print(doubledata)
 ~~~
 {: .language-python}
 
@@ -540,7 +535,7 @@ arithmetic operation with another array of the same shape, the operation will be
 corresponding elements of the two arrays.  Thus:
 
 ~~~
-tripledata = doubledata + data
+tripledata = doubledata + small
 ~~~
 {: .language-python}
 
@@ -549,7 +544,7 @@ and so on for all other elements of the arrays.
 
 ~~~
 print('tripledata:')
-print(tripledata[:3, 36:])
+print(tripledata)
 ~~~
 {: .language-python}
 
@@ -687,19 +682,18 @@ If we ask for the average across axis 0 (rows in our 2D example),
 we get:
 
 ~~~
-print(numpy.mean(data, axis=0))
+print(numpy.mean(data, axis=1))
 ~~~
 {: .language-python}
 
 ~~~
-[  0.           0.45         1.11666667   1.75         2.43333333   3.15
-   3.8          3.88333333   5.23333333   5.51666667   5.95         5.9
-   8.35         7.73333333   8.36666667   9.5          9.58333333
-  10.63333333  11.56666667  12.35        13.25        11.96666667
-  11.03333333  10.16666667  10.           8.66666667   9.15         7.25
-   7.33333333   6.58333333   6.06666667   5.95         5.11666667   3.6
-   3.3          3.56666667   2.48333333   1.5          1.13333333
-   0.56666667]
+array([5.45 , 5.425, 6.1  , 5.9  , 5.55 , 6.225, 5.975, 6.65 , 6.625,
+       6.525, 6.775, 5.8  , 6.225, 5.75 , 5.225, 6.3  , 6.55 , 5.7  ,
+       5.85 , 6.55 , 5.775, 5.825, 6.175, 6.1  , 5.8  , 6.425, 6.05 ,
+       6.025, 6.175, 6.55 , 6.175, 6.35 , 6.725, 6.125, 7.075, 5.725,
+       5.925, 6.15 , 6.075, 5.75 , 5.975, 5.725, 6.3  , 5.9  , 6.75 ,
+       5.925, 7.225, 6.15 , 5.95 , 6.275, 5.7  , 6.1  , 6.825, 5.975,
+       6.725, 5.7  , 6.25 , 6.4  , 7.05 , 5.9  ])
 ~~~
 {: .output}
 
@@ -707,35 +701,38 @@ As a quick check,
 we can ask this array what its shape is:
 
 ~~~
-print(numpy.mean(data, axis=0).shape)
+print(numpy.mean(data, axis=1).shape)
 ~~~
 {: .language-python}
 
 ~~~
-(40,)
+(60,)
 ~~~
 {: .output}
 
-The expression `(40,)` tells us we have an N×1 vector,
-so this is the average inflammation per day for all patients.
-If we average across axis 1 (columns in our 2D example), we get:
+The expression `(60,)` tells us we have an N×1 vector,
+so this is the for each patient.
+
+If we average across axis 0, we get:
 
 ~~~
-print(numpy.mean(data, axis=1))
+print(numpy.mean(data, axis=0))
 ~~~
 {: .language-python}
 
 ~~~
-[ 5.45   5.425  6.1    5.9    5.55   6.225  5.975  6.65   6.625  6.525
-  6.775  5.8    6.225  5.75   5.225  6.3    6.55   5.7    5.85   6.55
-  5.775  5.825  6.175  6.1    5.8    6.425  6.05   6.025  6.175  6.55
-  6.175  6.35   6.725  6.125  7.075  5.725  5.925  6.15   6.075  5.75
-  5.975  5.725  6.3    5.9    6.75   5.925  7.225  6.15   5.95   6.275  5.7
-  6.1    6.825  5.975  6.725  5.7    6.25   6.4    7.05   5.9  ]
+array([ 0.        ,  0.45      ,  1.11666667,  1.75      ,  2.43333333,
+        3.15      ,  3.8       ,  3.88333333,  5.23333333,  5.51666667,
+        5.95      ,  5.9       ,  8.35      ,  7.73333333,  8.36666667,
+        9.5       ,  9.58333333, 10.63333333, 11.56666667, 12.35      ,
+       13.25      , 11.96666667, 11.03333333, 10.16666667, 10.        ,
+        8.66666667,  9.15      ,  7.25      ,  7.33333333,  6.58333333,
+        6.06666667,  5.95      ,  5.11666667,  3.6       ,  3.3       ,
+        3.56666667,  2.48333333,  1.5       ,  1.13333333,  0.56666667])
 ~~~
 {: .output}
 
-which is the average inflammation per patient across all days.
+which is the average inflammation per day across all patients.
 
 ## Visualizing data
 The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and
