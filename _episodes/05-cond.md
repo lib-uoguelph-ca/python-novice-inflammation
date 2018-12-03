@@ -339,10 +339,10 @@ freeing us from having to manually examine every plot for features we've seen be
 > that work like this:
 >
 > ~~~
-> > x = 1  # original value
-> > x += 1 # add one to x, assigning result back to x
-> > x *= 3 # multiply x by 3
-> > print(x)
+> x = 1  # original value
+> x += 1 # add one to x, assigning result back to x
+> x *= 3 # multiply x by 3
+> print(x)
 > ~~~
 > {: .language-python}
 >
