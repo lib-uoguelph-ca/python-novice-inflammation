@@ -357,11 +357,13 @@ freeing us from having to manually examine every plot for features we've seen be
 > than writing the same without in-place operators?
 >
 positive_sum = 0
+> ~~~
 > negative_sum = 0
 > test_list = [3, 4, 6, 1, -1, -5, 0, 7, -8]
 > for num in test_list:
 >   # Your code here
 > print(positive_sum, negative_sum)
+> ~~~
 > {: .language-python}
 >
 > > ## Solution
