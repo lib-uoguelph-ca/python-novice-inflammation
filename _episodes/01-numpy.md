@@ -871,6 +871,11 @@ the graphs will actually be squeezed together more closely.)
 > are imported.
 {: .callout}
 
+> ## More on Matplotlib
+>
+> For more information about using Matplotlib, check out the [Matplotlib documentation](https://matplotlib.org/index.html) and [The Python Graph Gallery](https://python-graph-gallery.com/)
+{: .callout}
+
 > ## Check Your Understanding
 >
 > What values do the variables `mass` and `age` have after each statement in the following program?

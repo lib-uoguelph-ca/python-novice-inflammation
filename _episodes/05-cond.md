@@ -184,7 +184,7 @@ else:
 Let's test that out:
 
 ~~~
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+data = numpy.loadtxt(fname='data/inflammation-01.csv', delimiter=',')
 
 max_inflammation_0 = numpy.max(data, axis=0)[0]
 max_inflammation_20 = numpy.max(data, axis=0)[20]
@@ -204,7 +204,7 @@ Suspicious looking maxima!
 {: .output}
 
 ~~~
-data = numpy.loadtxt(fname='inflammation-03.csv', delimiter=',')
+data = numpy.loadtxt(fname='data/inflammation-03.csv', delimiter=',')
 
 max_inflammation_0 = numpy.max(data, axis=0)[0]
 max_inflammation_20 = numpy.max(data, axis=0)[20]
@@ -339,10 +339,10 @@ freeing us from having to manually examine every plot for features we've seen be
 > that work like this:
 >
 > ~~~
-> x = 1  # original value
-> x += 1 # add one to x, assigning result back to x
-> x *= 3 # multiply x by 3
-> print(x)
+> > x = 1  # original value
+> > x += 1 # add one to x, assigning result back to x
+> > x *= 3 # multiply x by 3
+> > print(x)
 > ~~~
 > {: .language-python}
 >
