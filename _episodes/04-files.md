@@ -115,21 +115,21 @@ where the maxima are a bit less regular, but the minima are consistently zero.
 > > ## Solution
 > > ~~~
 > > import glob
-> > import numpy
-> > import matplotlib.pyplot
+> > import numpy as np
+> > import matplotlib.pyplot as plt
 > >
-> > filenames = sorted(glob.glob('data/inflammation*.csv'))
+> > filenames = glob.glob('data/inflammation*.csv')
+> > filenames = sorted(filenames)[0:2]
 > >
-> > data0 = numpy.loadtxt(fname=filenames[0], delimiter=',')
-> > data1 = numpy.loadtxt(fname=filenames[1], delimiter=',')
+> > data1 = np.loadtxt(fname=filenames[0], delimiter=',')
+> > data2 = np.loadtxt(fname=filenames[1], delimiter=',')
 > >
-> > fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+> > means1 = np.mean(data1, axis=0)
+> > means2 = np.mean(data2, axis=0)
+> > diff = means1 - means2
 > >
-> > matplotlib.pyplot.ylabel('Difference in average')
-> > matplotlib.pyplot.plot(numpy.mean(data0, axis=0) - numpy.mean(data1, axis=0))
-> >
-> > fig.tight_layout()
-> > matplotlib.pyplot.show()
+> > plt.plot(diff)
+> > plt.show()
 > > ~~~
 > > {: .language-python}
 > {: .solution}
