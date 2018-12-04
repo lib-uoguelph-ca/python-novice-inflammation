@@ -16,7 +16,7 @@ keypoints:
 - "Be humble."
 ---
 
-Once testing has uncovered problems,
+Once you've identified some bugs in your code
 the next step is to fix them.
 Many novices do this by making more-or-less random changes to their code
 until it seems to produce the right answer,
@@ -33,15 +33,15 @@ The first step in debugging something is to
 "My program doesn't work" isn't good enough:
 in order to diagnose and fix problems,
 we need to be able to tell correct output from incorrect.
-If we can write a test case for the failing case --- i.e.,
-if we can assert that with *these* inputs,
+If we can create a test case for the failing case --- i.e.,
+if we can say that with *these* inputs,
 the function should produce *that* result ---
 then we're ready to start debugging.
 If we can't,
 then we need to figure out how we're going to know when we've fixed things.
 
-But writing test cases for scientific software is frequently harder than
-writing test cases for commercial applications,
+But creating test cases for scientific software is frequently harder than
+creating test cases for commercial applications,
 because if we knew what the output of the scientific code was supposed to be,
 we wouldn't be running the software:
 we'd be writing up our results and moving on to the next program.
@@ -163,9 +163,6 @@ we should re-run our tests immediately,
 because the more things we change at once,
 the harder it is to know what's responsible for what
 (those N<sup>2</sup> interactions again).
-And we should re-run *all* of our tests:
-more than half of fixes made to code introduce (or re-introduce) bugs,
-so re-running all of our tests tells us whether we have regressed.
 
 ## Keep Track of What You've Done
 
