@@ -463,7 +463,7 @@ Albania     1601.056136     3313.422188
 ~~~
 {: .output}
 
-## Result of slicing can be used in further operations.
+## Pandas and Numpy
 
 Usually we won't just print a slice. Instead, we'll use it as the basis to do some other form of computation. Fortunately, numpy and pandas are designed to work together, so we can use the same numpy methods with our Dataframes:
 
